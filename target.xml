@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<!DOCTYPE TEI SYSTEM "customisation-tei/tei_readingExp.dtd">
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Journal (septembre 1940-septembre 1942)</title>
+            <author>
+               <persName>
+                  <forename>Jean</forename>
+                  <surname>Lambert</surname>
+               </persName>
+               <persName type="pseudo"></persName>
+            </author>
+         </titleStmt>
+         <sourceDesc>
+            <msDesc>
+               <msIdentifier>
+                  <country></country>
+                  <settlement></settlement>
+                  <institution></institution>
+                  <repository></repository>
+                  <collection></collection>
+                  <idno></idno>
+               </msIdentifier>
+               <additional></additional>
+            </msDesc>
+            <biblStruct>
+               <monogr>
+                  <author>
+                     <persName>
+                        <forename>Jean</forename>
+                        <surname>Lambert</surname>
+                        <roleName></roleName>
+                     </persName>
+                     <persName type="pseudo"></persName>
+                  </author>
+                  <title>Journal (septembre 1940-septembre 1942)</title>
+                  <imprint>
+                     <publisher>Presses de l'Université de Provence</publisher>
+                     <pubPlace>Marseille</pubPlace>
+                     <date when="2005">2005</date>
+                  </imprint>
+                  <availability status="free"><p>Disponible à l'adresse <ref target="http://publications.univ-provence.fr/ddb/document.php?id=98"></ref></p></availability>
+                  <biblScope></biblScope>
+               </monogr>
+               <noteStmt>
+                  <note/>
+               </noteStmt>
+            </biblStruct>
+         </sourceDesc>
+      </fileDesc>
+      <profileDesc>
+         <correspDesc>
+            <correspAction type="sending">
+               <persName>
+                  <forename></forename>
+                  <surname></surname>
+               </persName>
+            </correspAction>
+            <correspAction type="receiving">
+               <persName>
+                  <forename></forename>
+                  <surname></surname>
+               </persName>
+            </correspAction>
+         </correspDesc>
+         <langUsage>
+            <language ident="fr-FR">Français</language>
+         </langUsage>
+      </profileDesc>
+      <experienceDesc>
+         <experience ref="#">
+            <respStmt>
+               <resp>Edited by</resp>
+               <persName>
+                  <forename>François</forename>
+                  <surname>Vignale</surname>
+               </persName>
+               <address>
+                  <addressline></addressline>
+               </address>
+            </respStmt>
+            <date when="1941-04-22"/>
+            <time/>
+            <reader>
+               <persName>
+                  <forename>Jean</forename>
+                  <surname>Lambert</surname>
+                  <roleName></roleName>
+               </persName>
+               <sex>M</sex>
+               <birth>1914-12-31</birth>
+               <age/>
+               <occupation scheme="http://eured.univ-lemans.fr/ontologies/occupation"></occupation>
+               <country></country>
+               <education scheme="http://eured.univ-lemans.fr/ontologies/education"></education>
+               <faith scheme="http://eured.univ-lemans.fr/ontologies/faith"></faith>
+               <nationality/>
+               <readerStatus scheme="http://eured.univ-lemans.fr/ontologies/reader_status">professional</readerStatus>
+            </reader>
+            <listener>
+               <persName>
+                  <forename />
+                  <surname />
+                  <roleName></roleName>
+               </persName>
+               <sex />
+               <birth />
+               <age/>
+               <occupation scheme="http://eured.univ-lemans.fr/ontologies/occupation"></occupation>
+               <country />
+               <education scheme="http://eured.univ-lemans.fr/ontologies/education"></education>
+               <faith scheme="http://eured.univ-lemans.fr/ontologies/faith"></faith>
+               <nationality />
+               <listenerStatus scheme="http://eured.univ-lemans.fr/ontologies/listener_status"></listenerStatus>
+            </listener>
+            <place>
+               <placeName/>
+               <location>
+                  <geo/>
+                  <country>France</c
+                  <author>
+                  <persName>
+                  <forename/>ountry>
+                  <settlement type="city">Marseille</settlement>
+                  <district/>
+               </location>
+            </place>     
+            <textRead>
+                     <surname/>
+                  </persName>
+                  <persName type="pseudo"></persName>
+               </author>
+               <title/>
+               <genre scheme="http://eured.univ-lemans.fr/ontologies/genre"></genre>
+               <textProvenance scheme="http://eured.univ-lemans.fr/ontologies/text_provenance"></textProvenance>          
+               <origLanguage>
+                  <language ident=""/>
+               </origLanguage>
+               <textForm scheme="http://eured.univ-lemans.fr/ontologies/text_form"></textForm>
+               <textStatus scheme="http://eured.univ-lemans.fr/ontologies/text_status"></textStatus>
+            </textRead>
+            <readingExp>
+               <experienceType scheme="http://eured.univ-lemans.fr/ontologies/experience_type"></experienceType>
+               <posture scheme="http://eured.univ-lemans.fr/ontologies/posture"></posture>
+               <lighting scheme ="http://eured.univ-lemans.fr/ontologies/lighting"></lighting>
+               <environment scheme="http://eured.univ-lemans.fr/ontologies/environment"></environment>
+               <intensity scheme="http://eured.univ-lemans.fr/ontologies/intensity"></intensity>
+               <emotion scheme="http://eured.univ-lemans.fr/ontologies/emotion"></emotion>
+               <testimony scheme="http://eured.univ-lemans.fr/ontologies/testimony"></testimony>
+               <sourceRelialabiblity scheme="http://eured.univ-lemans.fr/ontologies/source_reliability"></sourceRelialabiblity>
+               <expFrequency scheme="http://eured.univ-lemans.fr/ontologies/experience_frequency"></expFrequency>
+               <note></note>
+            </readingExp>
+           </experience>
+      </experienceDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <p>22 avril. Jours d'été. Je ne tarderai guère à prendre mon premier bain, tire déjà des
+            plans pour aller chaque midi aux Catalans. </p>
+         <p>J'achevais de lire Orlando, voilà deux semaines, quand j'ai appris la mort de 
+            Virginia Woolf. <experienceRef ref="#eured/c01-2015100573321">Je lis maintenant Années, qui me
+               rappelle, en plus léger, Les Buddenbrooks, et où certaines descriptions de la campagne
+               m'émeuvent comme celles d'Anna Karénine</experienceRef>; mais 
+            <experienceRef ref="#eured/test2">c'est aux Vagues que je continue à penser
+               avec un attachement à demi nostalgique (je les lisais à Berlin).
+            </experienceRef></p>
+      </body>
+   </text>
+</TEI>
