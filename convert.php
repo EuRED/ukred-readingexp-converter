@@ -542,7 +542,7 @@ foreach($csv->data as $data) {
 						$xml_textRead_author->appendChild($xml_persName7);
 						$xml_textRead->appendChild($xml_textRead_author);
 
-						$xml_textRead_title = $xml->createElement("title");
+						$xml_textRead_title = $xml->createElement("title", $data["text_read_title"]);
 						$xml_textRead->appendChild($xml_textRead_title);
 
 						foreach($genres as $key=>$genre) {
@@ -630,8 +630,6 @@ foreach($csv->data as $data) {
 				$xml_vol_num_div->setAttribute("type", "volume");
 				$xml_vol_num_div->setAttribute("n", $data["vol_num"]);
 				$xml_body->appendChild($xml_vol_num_div);
-			} else {
-
 			}
 			$xml_p = $xml->createElement( "p" , $data["evidence"]);
 			if($data["source_info"]!="") {
@@ -649,10 +647,17 @@ foreach($csv->data as $data) {
 				} else {
 					$xml_source_info_div->appendChild($xml_p);
 				}
-
-				$xml_body->appendChild($xml_source_info_div);
+				if($data["vol_num"]) {
+					$xml_vol_num_div->appendChild($xml_source_info_div);
+				} else {
+					$xml_body->appendChild($xml_source_info_div);
+				}
 			} else {
-				$xml_body->appendChild($xml_p);
+				if($data["vol_num"]) {
+					$xml_vol_num_div->appendChild($xml_p);
+				} else {
+					$xml_body->appendChild($xml_p);
+				}
 			}
 
 
