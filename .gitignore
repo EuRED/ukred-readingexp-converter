@@ -2,3 +2,6 @@ ukred.csv
 .idea
 composer.lock
 .DS_Store
+xml/ukred-*.xml
+ukred.xlsx
+ukred-extract.csv
