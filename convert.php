@@ -213,6 +213,21 @@ $religions["Wesleyan Methodist"]=array("FAI2441","Methodists");
 $religions["Wesleyan, later none"]=array("FAI2441","Methodists");
 $religions["Weslyan Methodist"]=array("FAI2441","Methodists");
 
+$provenances = array();
+$provenances["Borrowed (circulating library)"]=array("TPR202 Circulating","library");
+$provenances["borrowed (institution library)"]=array("TPR205 Institution","library");
+$provenances["borrowed (other)"]=array("TPR201 Borrowed informaly","(relations)");
+$provenances["borrowed (private library)"]=array("TPR208 Private","library");
+$provenances["borrowed (public library)"]=array("TPR209 Public","library");
+$provenances["Found"]=array("TPR204","Found");
+$provenances["NULL"]=array("TPR215","Unknown");
+$provenances["owned"]=array("TPR207","Owned");
+$provenances["read in situ"]=array("TPR210 Read in","situ");
+$provenances["reading group"]=array("TPR211 Reading","group");
+$provenances["stolen"]=array("TPR213","Stolen");
+$provenances["Subscription Library"]=array("TPR214 Subscription","library");
+$provenances["unknown"]=array("TPR215","Unknown");
+
 if(isset($argv[1])  && ($argv[1] != "")) {
 	$csv_filename = $argv[1];
 } else {
@@ -231,7 +246,13 @@ foreach($csv->data as $data) {
 	}
 
 // "Create" the document.
-	$xml = new DOMDocument( "1.0", "UTF-8" );
+	$implementation = new DOMImplementation();
+
+	$dtd = $implementation->createDocumentType('TEI',"customisation-tei/tei_readingExp.dtd");
+
+	$xml = $implementation->createDocument("", "", $dtd);
+	$xml->encoding = 'utf-8';
+
 	$xml->preserveWhiteSpace = false;
 	$xml->formatOutput = true;
 
@@ -243,6 +264,7 @@ foreach($csv->data as $data) {
 
 	// TEI Headers elements
 	$xml_tei = $xml->createElement( "TEI" );
+		$xml_tei->setAttribute("xmlns", "http://www.tei-c.org/ns/1.0");
 		$xml_teiHeader = $xml->createElement("teiHeader");
 			$xml_fileDesc = $xml->createElement("fileDesc");
 				$xml_titleStmt = $xml->createElement("titleStmt");
@@ -489,15 +511,24 @@ foreach($csv->data as $data) {
 						}
 						$xml_reader_country = $xml->createElement("country", $data["country_origin"]);
 						$xml_reader->appendChild($xml_reader_country);
-
+						if($data["reader_info"]!="") {
+							$xml_reader_note = $xml->createElement("note", $data["reader_info"]);
+							$xml_reader->appendChild($xml_reader_note);
+						}
 
 					$xml_listener = $xml->createElement("listener");
-						$xml_persName6 = $xml->createElement("persName");
-							$xml_forename6 = $xml->createElement("forename", $data["reader_firstname"]);
-							$xml_surname6 = $xml->createElement("surname", $data["reader_surname"]);
-						$xml_persName6->appendChild($xml_forename6);
-						$xml_persName6->appendChild($xml_surname6);
-					$xml_listener->appendChild($xml_persName6);
+						if(($data["listener_firstname"] != "") || ($data["listener_surname"] != "")) {
+							$xml_persName6 = $xml->createElement("persName");
+							$xml_forename6 = $xml->createElement("forename", $data["listener_firstname"]);
+							$xml_surname6 = $xml->createElement("surname", $data["listener_surname"]);
+							$xml_persName6->appendChild($xml_forename6);
+							$xml_persName6->appendChild($xml_surname6);
+							$xml_listener->appendChild($xml_persName6);
+						}
+						if($data["listeners_present"]!="") {
+							$xml_note_listeners = $xml->createElement("note", $data["listeners_present"]);
+							$xml_listener->appendChild($xml_note_listeners);
+						}
 
 
 					$xml_place = $xml->createElement("place");
@@ -557,7 +588,20 @@ foreach($csv->data as $data) {
 							}
 						}
 
-						$xml_textRead_textProvenance = $xml->createElement("textProvenance");
+						foreach($provenances as $key=>$provenance) {
+							//var_dump($genres);
+							if($data["provenance"]==$key) {
+								$provenance_label = $provenance[1];
+								$provenance_ref = $provenance[0];
+								$xml_textRead_textProvenance = $xml->createElement("textProvenance", $provenance_label);
+								$xml_textRead_textProvenance->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
+								$xml_textRead_textProvenance->setAttribute("ref",$provenance_ref);
+								break;
+							}
+						}
+
+
+						$xml_textRead_textProvenance->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/text_provenance");
 
 						$xml_textRead_origLanguage = $xml->createElement("origLanguage");
 							$xml_textRead_language=$xml->createElement("language");
@@ -588,17 +632,72 @@ foreach($csv->data as $data) {
 
 
 					$xml_readingExp = $xml->createElement("readingExp");
-						$xml_experienceType = $xml->createElement("experienceType");
-						$xml_posture = $xml->createElement("posture");
+					if($data["type_of_experience_reader_1_silent"]=="Y") {
+						$xml_experienceType = $xml->createElement("experienceType","Silent");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						if($data["type_of_experience_reader_2_solitary"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT122");
+						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT112");
+						} else {
+							$xml_experienceType->setAttribute("ref", "EXT132");
+						}
+						$xml_readingExp->appendChild($xml_experienceType);
+					}
+	if($data["type_of_experience_reader_1_aloud"]=="Y") {
+		$xml_experienceType = $xml->createElement("experienceType","Aloud");
+		$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+		if($data["type_of_experience_reader_2_solitary"]=="Y") {
+			$xml_experienceType->setAttribute("ref", "EXT121");
+		} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
+			$xml_experienceType->setAttribute("ref", "EXT111");
+		} else {
+			$xml_experienceType->setAttribute("ref", "EXT131");
+		}
+		$xml_readingExp->appendChild($xml_experienceType);
+	}
+	if($data["type_of_experience_reader_1_unknown"]=="Y") {
+		$xml_experienceType = $xml->createElement("experienceType","Unknown");
+		$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+		if($data["type_of_experience_reader_2_solitary"]=="Y") {
+			$xml_experienceType->setAttribute("ref", "EXT123");
+		} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
+			$xml_experienceType->setAttribute("ref", "EXT113");
+		} else {
+			$xml_experienceType->setAttribute("ref", "EXT13");
+		}
+		$xml_readingExp->appendChild($xml_experienceType);
+	}
+
+					$xml_posture = $xml->createElement("posture");
 						$xml_lighting = $xml->createElement("lighting");
 						$xml_environment = $xml->createElement("environment");
 						$xml_intensity = $xml->createElement("intensity");
 						$xml_emotion = $xml->createElement("emotion");
 						$xml_testimony = $xml->createElement("testimony");
 						$xml_sourceRelialabiblity = $xml->createElement("sourceRelialabiblity");
-						$xml_expFrequency = $xml->createElement("expFrequency");
+						$vs_frequency_label="";
+						$vs_frequency_ref="";
+						if($data["type_of_experience_reader_3"]=="NULL" || $data["type_of_experience_reader_3"]=="unknown") {
+							$vs_frequency_label="Unknown";
+							$vs_frequency_ref="EXF3";
+						}
+						if($data["type_of_experience_reader_3"]=="serial event") {
+							$vs_frequency_label="Serial event";
+							$vs_frequency_ref="EXF1";
+						}
+						if($data["type_of_experience_reader_3"]=="single event") {
+							$vs_frequency_label="Single event";
+							$vs_frequency_ref="EXF2";
+						}
+						$xml_expFrequency = $xml->createElement("expFrequency", $vs_frequency_label );
+						$xml_expFrequency->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/experience_frequency");
+						if($vs_frequency_ref!="") {
+							$xml_expFrequency->setAttribute("ref",$vs_frequency_ref);
+						}
+
 						$xml_note = $xml->createElement("note", $data["final_additional_comments"]);
-					$xml_readingExp->appendChild($xml_experienceType);
+
 					$xml_readingExp->appendChild($xml_posture);
 					$xml_readingExp->appendChild($xml_lighting);
 					$xml_readingExp->appendChild($xml_environment);
