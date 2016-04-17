@@ -5,3 +5,4 @@ composer.lock
 xml/ukred-*.xml
 ukred.xlsx
 ukred-extract.csv
+ukred-extract.xlsx
