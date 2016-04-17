@@ -410,3 +410,31 @@ Wesleyan Methodist => FAI2441 Methodists
 Wesleyan, later none => FAI2441 Methodists
 
 Weslyan Methodist => FAI2441 Methodists
+
+### provenance
+    
+Borrowed (circulating library) => TPR202 Circulating library
+
+borrowed (institution library) => TPR205 Institution library
+
+borrowed (other) => TPR201 Borrowed informaly (relations)
+
+borrowed (private library) => TPR208 Private library
+
+borrowed (public library) => TPR209 Public library
+
+Found => TPR204 Found
+
+NULL => TPR215 Unknown
+
+owned => TPR207 Owned
+
+read in situ => TPR210 Read in situ
+
+reading group => TPR211 Reading group
+
+stolen => TPR213 Stolen
+
+Subscription Library => TPR214 Subscription library
+
+unknown => TPR215 Unknown
