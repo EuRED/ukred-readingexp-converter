@@ -258,7 +258,7 @@ foreach($csv->data as $data) {
 
 	$is_manuscript = false;
 	if($data["manuscript_title"] != "") {
-		var_dump($data["manuscript_title"]);
+		//var_dump($data["manuscript_title"]);
 		$is_manuscript = true;
 	}
 
@@ -382,6 +382,7 @@ foreach($csv->data as $data) {
 		$xml_teiHeader->appendChild( $xml_profileDesc );
 			$xml_experienceDesc = $xml->createElement("experienceDesc");
 				$xml_experience = $xml->createElement("experience");
+				$xml_experience->setAttribute("ref", "ukred-".$data["id"]);
 					$xml_respStmt = $xml->createElement("respStmt");
 						if($data["firstname"] || $data["surname"]) {
 							$xml_resp = $xml->createElement("resp", "submitted by");
@@ -399,6 +400,7 @@ foreach($csv->data as $data) {
 							$xml_respStmt->appendChild($xml_address3);
 							$xml_respStmt->appendChild($xml_email3);
 						}
+					$xml_respStmt2 = $xml->createElement("respStmt");
 						if($data["reviewed_by"]) {
 							$xml_resp2 = $xml->createElement("resp", "reviewed by");
 							$xml_persName8 = $xml->createElement("persName");
@@ -406,10 +408,10 @@ foreach($csv->data as $data) {
 							$xml_surname8 = $xml->createElement("surname", $data["reviewed_by"]);
 							$xml_persName8->appendChild($xml_forename8);
 							$xml_persName8->appendChild($xml_surname8);
-							$xml_respStmt->appendChild($xml_resp2);
-							$xml_respStmt->appendChild($xml_persName8);
+							$xml_respStmt2->appendChild($xml_resp2);
+							$xml_respStmt2->appendChild($xml_persName8);
 							$xml_date_review = $xml->createElement("date", $data["status_updated"]);
-							$xml_respStmt->appendChild($xml_date_review);
+							$xml_respStmt2->appendChild($xml_date_review);
 
 						}
 					$vs_date_text="";
@@ -420,16 +422,25 @@ foreach($csv->data as $data) {
 					if(($data["date_reading_day"]!="") || ($data["date_reading_month"]!="") || ($data["date_reading_year"]!="")) {
 						$vs_date_text=$data["date_reading_month"].". ".$data["date_reading_day"]." ".$data["date_reading_year"];
 						//print_r(date_format(date_create($vs_date), "Y-m-d"));
-						$vs_date_when = date_format(date_create($vs_date_text), "Y-m-d");
+						$date = date_create($vs_date_text);
+						if($date !== false) {
+							$vs_date_when = date_format($date, "Y-m-d");
+						}
 					} elseif (($data["date_reading_year_from"]!="")||($data["date_reading_year_to"]!="")) {
 						$vs_date_text_from = $data["date_reading_month_from"]." ".$data["date_reading_day_from"]." ".$data["date_reading_year_from"];
 						$vs_date_text_to = $data["date_reading_month_to"]." ".$data["date_reading_day_to"]." ".$data["date_reading_year_to"];
 						$vs_date_text = $vs_date_text_from." - ".$vs_date_text_to;
 						if(($data["date_reading_month_from"]!="") || ($data["date_reading_day_from"]!="") || ($data["date_reading_year_from"]!="") ) {
-							$vs_date_from = date_format(date_create($vs_date_text_from), "Y-m-d");
+							$date = date_create($vs_date_text_from);
+							if($date !== false) {
+								$vs_date_from = date_format($date, "Y-m-d");
+							}
 						}
 						if(($data["date_reading_month_to"]!="") || ($data["date_reading_day_to"]!="") || ($data["date_reading_year_to"]!="") ) {
-							$vs_date_to = date_format(date_create($vs_date_text_to), "Y-m-d");
+							$date = date_create($vs_date_text_to);
+							if($date !== false) {
+								$vs_date_to = date_format($date, "Y-m-d");
+							}
 						}
 					}
 					if($vs_date_text) {
@@ -451,19 +462,23 @@ foreach($csv->data as $data) {
 					if($data["date_reading_unknown"]=="Y") {
 						$xml_date->setAttribute("cert", "unknown");
 					}
+					// 8-12
 					if($data["time_morning"] == "Y") {
 						$vt_time[] = "in the morning".($data["time_morning_info"] ? " (".$data["time_morning_info"].")" : "");
 					}
+					// 13-17
 					if($data["time_afternoon"] == "Y") {
 						$vt_time[] = "in the afternoon".($data["time_afternoon_info"] ? " (".$data["time_afternoon_info"].")" : "");
 					}
+					// 18-22
 					if($data["time_evening"] == "Y") {
 						$vt_time[] = "in the evening".($data["time_evening_info"] ? " (".$data["time_evening_info"].")" : "");
 					}
+					// 8-22
 					if($data["time_daytime"] == "Y") {
 						$vt_time[] = "during daytime".($data["time_daytime_info"] ? " (".$data["time_daytime_info"].")" : "");
 					}
-
+					// 23-7
 					if($data["time_night_time"] == "Y") {
 						$vt_time[] = "in the morning".($data["time_night_time_info"] ? " (".$data["time_night_time_info"].")" : "");
 					}
@@ -497,6 +512,15 @@ foreach($csv->data as $data) {
 						$xml_reader->appendChild($xml_persName5);
 						$xml_reader->appendChild($xml_reader_sex);
 						$xml_reader->appendChild($xml_reader_age);
+
+						$xml_reader_occupation = $xml->createElement("occupation");
+						$xml_reader_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/occupation");
+						$xml_reader->appendChild($xml_reader_occupation);
+
+						$xml_reader_education = $xml->createElement("education");
+						$xml_reader_education->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/education");
+						$xml_reader->appendChild($xml_reader_education);
+
 						$xml_reader->appendChild($xml_reader_birth);
 						foreach($religions as $key=>$religion) {
 							//var_dump($genres);
@@ -515,6 +539,10 @@ foreach($csv->data as $data) {
 							$xml_reader_note = $xml->createElement("note", $data["reader_info"]);
 							$xml_reader->appendChild($xml_reader_note);
 						}
+						$xml_reader_status = $xml->createElement("readerStatus");
+						$xml_reader_status->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/reader_status");
+						$xml_reader->appendChild($xml_reader_status);
+	
 
 					$xml_listener = $xml->createElement("listener");
 						if(($data["listener_firstname"] != "") || ($data["listener_surname"] != "")) {
@@ -524,6 +552,23 @@ foreach($csv->data as $data) {
 							$xml_persName6->appendChild($xml_forename6);
 							$xml_persName6->appendChild($xml_surname6);
 							$xml_listener->appendChild($xml_persName6);
+
+							$xml_listener_occupation = $xml->createElement("occupation");
+							$xml_listener_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/occupation");
+							$xml_listener->appendChild($xml_reader_occupation);
+
+							$xml_listener_education = $xml->createElement("education");
+							$xml_listener_education->setAttribute("scheme","http://eured.univ-lemans.fr/education/faith");
+							$xml_listener->appendChild($xml_listener_education);
+
+							$xml_listener_religion = $xml->createElement("faith");
+							$xml_listener_religion->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
+							$xml_listener->appendChild($xml_listener_religion);
+
+							$xml_listenerStatus = $xml->createElement("listenerStatus");
+							$xml_listenerStatus->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/listener_status");
+							$xml_listener->appendChild($xml_listenerStatus);
+
 						}
 						if($data["listeners_present"]!="") {
 							$xml_note_listeners = $xml->createElement("note", $data["listeners_present"]);
@@ -596,15 +641,15 @@ foreach($csv->data as $data) {
 								$xml_textRead_textProvenance = $xml->createElement("textProvenance", $provenance_label);
 								$xml_textRead_textProvenance->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
 								$xml_textRead_textProvenance->setAttribute("ref",$provenance_ref);
+								$xml_textRead_textProvenance->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/text_provenance");
+								$xml_textRead->appendChild($xml_textRead_textProvenance);
 								break;
 							}
 						}
 
 
-						$xml_textRead_textProvenance->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/text_provenance");
-
 						$xml_textRead_origLanguage = $xml->createElement("origLanguage");
-							$xml_textRead_language=$xml->createElement("language");
+						$xml_textRead_language=$xml->createElement("language");
 						$xml_textRead_origLanguage->appendChild($xml_textRead_language);
 
 						foreach($textforms as $key=>$textform) {
@@ -618,16 +663,15 @@ foreach($csv->data as $data) {
 								$xml_textRead->appendChild($xml_textRead_textForm);
 							}
 						}
-						$xml_textRead_textForm = $xml->createElement("textForm");
+
 
 						$xml_textRead_textStatus = $xml->createElement("textStatus");
+						$xml_textRead_textStatus->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/text_status");
 
 
 
 
-					$xml_textRead->appendChild($xml_textRead_textProvenance);
 					$xml_textRead->appendChild($xml_textRead_origLanguage);
-					$xml_textRead->appendChild($xml_textRead_textForm);
 					$xml_textRead->appendChild($xml_textRead_textStatus);
 
 
@@ -669,13 +713,22 @@ foreach($csv->data as $data) {
 		$xml_readingExp->appendChild($xml_experienceType);
 	}
 
-					$xml_posture = $xml->createElement("posture");
+						$xml_posture = $xml->createElement("posture");
+						$xml_posture->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/posture");
+
 						$xml_lighting = $xml->createElement("lighting");
+						$xml_lighting->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/lighting");
 						$xml_environment = $xml->createElement("environment");
+						$xml_environment->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/environment");
 						$xml_intensity = $xml->createElement("intensity");
+						$xml_intensity->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/intensity");
 						$xml_emotion = $xml->createElement("emotion");
+						$xml_emotion->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/emotion");
 						$xml_testimony = $xml->createElement("testimony");
-						$xml_sourceRelialabiblity = $xml->createElement("sourceRelialabiblity");
+						$xml_testimony->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/testimony");
+						$xml_sourceReliability = $xml->createElement("sourceReliability");
+						$xml_sourceReliability->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/source_reliability");
+
 						$vs_frequency_label="";
 						$vs_frequency_ref="";
 						if($data["type_of_experience_reader_3"]=="NULL" || $data["type_of_experience_reader_3"]=="unknown") {
@@ -704,11 +757,12 @@ foreach($csv->data as $data) {
 					$xml_readingExp->appendChild($xml_intensity);
 					$xml_readingExp->appendChild($xml_emotion);
 					$xml_readingExp->appendChild($xml_testimony);
-					$xml_readingExp->appendChild($xml_sourceRelialabiblity);
+					$xml_readingExp->appendChild($xml_sourceReliability);
 					$xml_readingExp->appendChild($xml_expFrequency);
 					$xml_readingExp->appendChild($xml_note);
 
 				$xml_experience->appendChild($xml_respStmt);
+				$xml_experience->appendChild($xml_respStmt2);
 				$xml_experience->appendChild($xml_date);
 				$xml_experience->appendChild($xml_time);
 				$xml_experience->appendChild($xml_reader);
@@ -730,7 +784,12 @@ foreach($csv->data as $data) {
 				$xml_vol_num_div->setAttribute("n", $data["vol_num"]);
 				$xml_body->appendChild($xml_vol_num_div);
 			}
-			$xml_p = $xml->createElement( "p" , $data["evidence"]);
+			$evidence = str_replace('""','"',$data["evidence"]);
+			$evidence = str_replace("'",'&quot;',$data["evidence"]);
+			$xml_ptr = $xml->createElement("ptr", $evidence);
+			$xml_ptr->setAttribute("target", "ukred-".$data["id"]);
+			$xml_p = $xml->createElement( "p");
+			$xml_p->appendChild($xml_ptr);
 			if($data["source_info"]!="") {
 				// Documentation vue ici : http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-div.html
 				$xml_source_info_div = $xml->createElement( "div");
