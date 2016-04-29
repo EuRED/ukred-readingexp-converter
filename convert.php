@@ -514,11 +514,11 @@ foreach($csv->data as $data) {
 						$xml_reader->appendChild($xml_reader_age);
 
 						$xml_reader_occupation = $xml->createElement("occupation");
-						$xml_reader_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/occupation");
+						$xml_reader_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/occupation");
 						$xml_reader->appendChild($xml_reader_occupation);
 
 						$xml_reader_education = $xml->createElement("education");
-						$xml_reader_education->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/education");
+						$xml_reader_education->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/education");
 						$xml_reader->appendChild($xml_reader_education);
 
 						$xml_reader->appendChild($xml_reader_birth);
@@ -528,7 +528,7 @@ foreach($csv->data as $data) {
 								$religion_label = $religion[1];
 								$religion_ref = $religion[0];
 								$xml_reader_religion = $xml->createElement("faith", $religion_label);
-								$xml_reader_religion->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
+								$xml_reader_religion->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/faith");
 								$xml_reader_religion->setAttribute("ref",$religion_ref);
 								$xml_reader->appendChild($xml_reader_religion);
 							}
@@ -540,7 +540,7 @@ foreach($csv->data as $data) {
 							$xml_reader->appendChild($xml_reader_note);
 						}
 						$xml_reader_status = $xml->createElement("readerStatus");
-						$xml_reader_status->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/reader_status");
+						$xml_reader_status->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/reader_status");
 						$xml_reader->appendChild($xml_reader_status);
 	
 
@@ -554,7 +554,7 @@ foreach($csv->data as $data) {
 							$xml_listener->appendChild($xml_persName6);
 
 							$xml_listener_occupation = $xml->createElement("occupation");
-							$xml_listener_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/occupation");
+							$xml_listener_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/occupation");
 							$xml_listener->appendChild($xml_reader_occupation);
 
 							$xml_listener_education = $xml->createElement("education");
@@ -562,11 +562,11 @@ foreach($csv->data as $data) {
 							$xml_listener->appendChild($xml_listener_education);
 
 							$xml_listener_religion = $xml->createElement("faith");
-							$xml_listener_religion->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
+							$xml_listener_religion->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/faith");
 							$xml_listener->appendChild($xml_listener_religion);
 
 							$xml_listenerStatus = $xml->createElement("listenerStatus");
-							$xml_listenerStatus->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/listener_status");
+							$xml_listenerStatus->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/listener_status");
 							$xml_listener->appendChild($xml_listenerStatus);
 
 						}
@@ -627,7 +627,7 @@ foreach($csv->data as $data) {
 								$genre_label = $genre[1];
 								$genre_ref = $genre[0];
 								$xml_textRead_genre = $xml->createElement("genre", $genre_label);
-								$xml_textRead_genre->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/genre");
+								$xml_textRead_genre->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/genre");
 								$xml_textRead_genre->setAttribute("ref",$genre_ref);
 								$xml_textRead->appendChild($xml_textRead_genre);
 							}
@@ -639,9 +639,9 @@ foreach($csv->data as $data) {
 								$provenance_label = $provenance[1];
 								$provenance_ref = $provenance[0];
 								$xml_textRead_textProvenance = $xml->createElement("textProvenance", $provenance_label);
-								$xml_textRead_textProvenance->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/faith");
+								$xml_textRead_textProvenance->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/faith");
 								$xml_textRead_textProvenance->setAttribute("ref",$provenance_ref);
-								$xml_textRead_textProvenance->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/text_provenance");
+								$xml_textRead_textProvenance->setAttribute("scheme", "http://eured.univ-lemans.fr/thesaurus/text_provenance");
 								$xml_textRead->appendChild($xml_textRead_textProvenance);
 								break;
 							}
@@ -658,7 +658,7 @@ foreach($csv->data as $data) {
 								$textform_label = $textform[1];
 								$textform_ref = $textform[0];
 								$xml_textRead_textForm = $xml->createElement("textForm", $textform_label);
-								$xml_textRead_textForm->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/text_form");
+								$xml_textRead_textForm->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/text_form");
 								$xml_textRead_textForm->setAttribute("ref",$textform_ref);
 								$xml_textRead->appendChild($xml_textRead_textForm);
 							}
@@ -666,7 +666,7 @@ foreach($csv->data as $data) {
 
 
 						$xml_textRead_textStatus = $xml->createElement("textStatus");
-						$xml_textRead_textStatus->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/text_status");
+						$xml_textRead_textStatus->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/text_status");
 
 
 					$xml_textRead->appendChild($xml_textRead_origLanguage);
@@ -676,7 +676,7 @@ foreach($csv->data as $data) {
 					$xml_readingExp = $xml->createElement("readingExp");
 					if($data["type_of_experience_reader_1_silent"]=="Y") {
 						$xml_experienceType = $xml->createElement("experienceType","Silent");
-						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/thesaurus/experience_type");
 						if($data["type_of_experience_reader_2_solitary"]=="Y") {
 							$xml_experienceType->setAttribute("ref", "EXT122");
 						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
@@ -688,7 +688,7 @@ foreach($csv->data as $data) {
 					}
 					if($data["type_of_experience_reader_1_aloud"]=="Y") {
 						$xml_experienceType = $xml->createElement("experienceType","Aloud");
-						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/thesaurus/experience_type");
 						if($data["type_of_experience_reader_2_solitary"]=="Y") {
 							$xml_experienceType->setAttribute("ref", "EXT121");
 						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
@@ -700,7 +700,7 @@ foreach($csv->data as $data) {
 					}
 					if($data["type_of_experience_reader_1_unknown"]=="Y") {
 						$xml_experienceType = $xml->createElement("experienceType","Unknown");
-						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/thesaurus/experience_type");
 						if($data["type_of_experience_reader_2_solitary"]=="Y") {
 							$xml_experienceType->setAttribute("ref", "EXT123");
 						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
@@ -712,20 +712,20 @@ foreach($csv->data as $data) {
 					}
 
 						$xml_posture = $xml->createElement("posture");
-						$xml_posture->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/posture");
+						$xml_posture->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/posture");
 
 						$xml_lighting = $xml->createElement("lighting");
-						$xml_lighting->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/lighting");
+						$xml_lighting->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/lighting");
 						$xml_environment = $xml->createElement("environment");
-						$xml_environment->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/environment");
+						$xml_environment->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/environment");
 						$xml_intensity = $xml->createElement("intensity");
-						$xml_intensity->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/intensity");
+						$xml_intensity->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/intensity");
 						$xml_emotion = $xml->createElement("emotion");
-						$xml_emotion->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/emotion");
+						$xml_emotion->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/emotion");
 						$xml_testimony = $xml->createElement("testimony");
-						$xml_testimony->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/testimony");
+						$xml_testimony->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/testimony");
 						$xml_sourceReliability = $xml->createElement("sourceReliability");
-						$xml_sourceReliability->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/source_reliability");
+						$xml_sourceReliability->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/source_reliability");
 
 						$vs_frequency_label="";
 						$vs_frequency_ref="";
@@ -742,7 +742,7 @@ foreach($csv->data as $data) {
 							$vs_frequency_ref="EXF2";
 						}
 						$xml_expFrequency = $xml->createElement("expFrequency", $vs_frequency_label );
-						$xml_expFrequency->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/experience_frequency");
+						$xml_expFrequency->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/experience_frequency");
 						if($vs_frequency_ref!="") {
 							$xml_expFrequency->setAttribute("ref",$vs_frequency_ref);
 						}
