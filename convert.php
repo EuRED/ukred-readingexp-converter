@@ -669,8 +669,6 @@ foreach($csv->data as $data) {
 						$xml_textRead_textStatus->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/text_status");
 
 
-
-
 					$xml_textRead->appendChild($xml_textRead_origLanguage);
 					$xml_textRead->appendChild($xml_textRead_textStatus);
 
@@ -688,30 +686,30 @@ foreach($csv->data as $data) {
 						}
 						$xml_readingExp->appendChild($xml_experienceType);
 					}
-	if($data["type_of_experience_reader_1_aloud"]=="Y") {
-		$xml_experienceType = $xml->createElement("experienceType","Aloud");
-		$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
-		if($data["type_of_experience_reader_2_solitary"]=="Y") {
-			$xml_experienceType->setAttribute("ref", "EXT121");
-		} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
-			$xml_experienceType->setAttribute("ref", "EXT111");
-		} else {
-			$xml_experienceType->setAttribute("ref", "EXT131");
-		}
-		$xml_readingExp->appendChild($xml_experienceType);
-	}
-	if($data["type_of_experience_reader_1_unknown"]=="Y") {
-		$xml_experienceType = $xml->createElement("experienceType","Unknown");
-		$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
-		if($data["type_of_experience_reader_2_solitary"]=="Y") {
-			$xml_experienceType->setAttribute("ref", "EXT123");
-		} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
-			$xml_experienceType->setAttribute("ref", "EXT113");
-		} else {
-			$xml_experienceType->setAttribute("ref", "EXT13");
-		}
-		$xml_readingExp->appendChild($xml_experienceType);
-	}
+					if($data["type_of_experience_reader_1_aloud"]=="Y") {
+						$xml_experienceType = $xml->createElement("experienceType","Aloud");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						if($data["type_of_experience_reader_2_solitary"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT121");
+						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT111");
+						} else {
+							$xml_experienceType->setAttribute("ref", "EXT131");
+						}
+						$xml_readingExp->appendChild($xml_experienceType);
+					}
+					if($data["type_of_experience_reader_1_unknown"]=="Y") {
+						$xml_experienceType = $xml->createElement("experienceType","Unknown");
+						$xml_experienceType->setAttribute("scheme", "http://eured.univ-lemans.fr/ontologies/experience_type");
+						if($data["type_of_experience_reader_2_solitary"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT123");
+						} elseif($data["type_of_experience_reader_2_in_company"]=="Y") {
+							$xml_experienceType->setAttribute("ref", "EXT113");
+						} else {
+							$xml_experienceType->setAttribute("ref", "EXT13");
+						}
+						$xml_readingExp->appendChild($xml_experienceType);
+					}
 
 						$xml_posture = $xml->createElement("posture");
 						$xml_posture->setAttribute("scheme","http://eured.univ-lemans.fr/ontologies/posture");
