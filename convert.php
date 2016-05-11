@@ -7,226 +7,7 @@
 //error_reporting(E_ERROR);
 require_once 'vendor/autoload.php';
 
-$genres=array();
-$genres["genre_bible"]=array("GEN704","Bible");
-$genres["genre_sermon"]=array("GEN731","Sermon");
-$genres["genre_other_religious"]=array("GEN724","Other Religious");
-$genres["genre_classics"]=array("GEN706","Classics");
-$genres["genre_fiction"]=array("GEN3","Fiction");
-$genres["genre_drama"]=array("GEN6","Drama");
-$genres["genre_essays"]=array("GEN713","Essays/criticism");
-$genres["genre_history"]=array("GEN716","History");
-$genres["genre_poetry"]=array("GEN2","Poetry");
-$genres["genre_children"]=array("GEN8","Children's lit");
-$genres["genre_social"]=array("GEN732","Social science");
-$genres["genre_heraldry"]=array("GEN715","Heraldry");
-$genres["genre_biography"]=array("GEN705","Biographies");
-$genres["genre_autobiog"]=array("GEN703","Autobiographies");
-$genres["genre_geography"]=array("GEN714","Geography/travel");
-$genres["genre_politics"]=array("GEN726","Politics");
-$genres["genre_philosophy"]=array("GEN725","Philosophy");
-$genres["genre_education"]=array("GEN7171","Education");
-$genres["genre_sport"]=array("GEN733","Sports/leisure");
-$genres["genre_crafts"]=array("GEN710","Crafts");
-$genres["genre_textbook"]=array("GEN7172","Textbook / Self education");
-$genres["genre_conduct"]=array("GEN708","Conduct books");
-$genres["genre_law"]=array("GEN718","Law");
-$genres["genre_science"]=array("GEN730","Science");
-$genres["genre_arts"]=array("???","???");
-$genres["genre_cookery"]=array("GEN709","Cookery");
-$genres["genre_medicine"]=array("GEN720","Medicine");
-$genres["genre_ephemera"]=array("GEN712","Ephemera");
-$genres["genre_mathematics"]=array("GEN719","Mathematics");
-$genres["genre_technology"]=array("GEN734","Technology");
-$genres["genre_emblem"]=array("GEN711","Emblem");
-$genres["genre_natural"]=array("GEN722","Natural history");
-$genres["genre_miscellary"]=array("GEN721","Misc/anthology");
-$genres["genre_astrology"]=array("GEN702","Astrology/alchemy/occult");
-$genres["genre_agriculture"]=array("GEN701","Agriculture/horticulture/Husbandry");
-$genres["genre_reference"]=array("GEN728","Reference/General work");
-$genres["genre_unknown"]=array("GEN9","Other / Unknown");
-$genres["genre_other"]=array("GEN9","Other / Unknown");
-
-$textforms = array();
-$textforms["form_text_print_advertisement"]=array("TFO01","Advertisement");
-$textforms["form_text_print_book"]=array("TFO02","Book");
-$textforms["form_text_print_broadsheet"]=array("TFO03","Broadsheet");
-$textforms["form_text_print_form"]=array("TFO10","Form");
-$textforms["form_text_print_handbill"]=array(" TFO12","Handbill");
-$textforms["form_text_print_newspaper"]=array("TFO17","Newspaper");
-$textforms["form_text_print_pamphlet"]=array("TFO18","Pamphlet");
-$textforms["form_text_print_poster"]=array(" TFO20","Poster");
-$textforms["form_text_print_serial"]=array("TFO24","Serial/periodical");
-$textforms["form_text_print_ticket"]=array("TFO26","Ticket");
-$textforms["form_text_print_unknown"]=array(" TFO27","Unknown");
-$textforms["form_text_print_other"]=array("TFO27","Unknown");
-$textforms["form_text_manuscript_codex"]=array("TFO04","Codex");
-$textforms["form_text_manuscript_graffito"]=array("TFO11","Graffito");
-$textforms["form_text_manuscript_letter"]=array("TFO15","Letter");
-$textforms["form_text_manuscript_pamphlet"]=array("TFO18","Pamphlet");
-$textforms["form_text_manuscript_roll"]=array("TFO22","Roll");
-$textforms["form_text_manuscript_sheet"]=array("TFO25","Sheet");
-$textforms["form_text_manuscript_unknown"]=array("TFO27","Unknown");
-$textforms["form_text_manuscript_other"]=array("TFO27","Unknown");
-$textforms["form_text_unknown"]=array("TFO27","Unknown");
-$textforms["form_text_known_publication"]=array("???","???");
-
-$religions = array();
-
-$religions["(Wavering) Church of Scotland"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["[lapsed] Catholic"]=array("FAI21","Catholic");
-$religions["Agnostic"]=array("FAI71","Agnostics");
-$religions["anabaptist (for a short time)"]=array("???","???");
-$religions["Anglican"]=array("FAI241","Anglicans");
-$religions["Anglican (?)"]=array("FAI241","Anglicans");
-$religions["Anglican?"]=array("FAI241","Anglicans");
-$religions["Anglicanism"]=array("FAI241","Anglicans");
-$religions["ascetic mystical Christian"]=array("FAI2","Christianity");
-$religions["At the time of reading a Roman Catholic"]=array("FAI217 Roman","Catholic");
-$religions["Atheist"]=array("FAI72","Atheists");
-$religions["Atheist (Marxist)"]=array("FAI72","Atheists");
-$religions["Atheist (PB Shelley); unknown (Clairmont)"]=array("FAI72","Atheists");
-$religions["Baptist"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Born into a Quaker family"]=array("FAI233","Quakers");
-$religions["C of E"]=array("FAI2411 Anglican Church of","England");
-$religions["C of E? Converted to Baptism 1800, Methodism 1802."]=array("FAI2411 Anglican Church of","England");
-$religions["C of E/ Methodist"]=array("FAI2411 Anglican Church of","England");
-$religions["C of Scotland"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Calvinist"]=array("FAI242","Calvinists");
-$religions["Catholic"]=array("FAI21","Catholic");
-$religions["Catholic (having been lapsed and reverted)"]=array("FAI21","Catholic");
-$religions["Catholic (lapsed)"]=array("FAI21","Catholic");
-$religions["Catholic [?]"]=array("FAI21","Catholic");
-$religions["Catholic by birth"]=array("FAI21","Catholic");
-$religions["Catholic?"]=array("FAI21","Catholic");
-$religions["Christain"]=array("FAI2","Christianity");
-$religions["Christian"]=array("FAI2","Christianity");
-$religions["Christian -  Unitarian"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Christian - denomination unknown"]=array("FAI2","Christianity");
-$religions["Christian - Evangelical"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Christian (Anglican)"]=array("FAI241","Anglicans");
-$religions["Christian (Anglican) later declared herself atheist"]=array("FAI241","Anglicans");
-$religions["Christian (Church of England)"]=array("FAI2411 Anglican Church of","England");
-$religions["Christian (denomination unknown)"]=array("FAI2","Christianity");
-$religions["Christian [family originally Parsee]"]=array("FAI2","Christianity");
-$religions["Christian, Protestant"]=array("FAI24","Protestants");
-$religions["Christianity/Anglican"]=array("FAI241","Anglicans");
-$religions["Chruch of Scotland"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Church of England"]=array("FAI2411 Anglican Church of","England");
-$religions["Church of England (evangelical)"]=array("FAI2411 Anglican Church of","England");
-$religions["Church of England; later atheist"]=array("FAI2411 Anglican Church of","England");
-$religions["Church of England/ Methodist"]=array("FAI2411 Anglican Church of","England");
-$religions["Church of Ireland"]=array("FAI2412 Anglican Church of","Ireland");
-$religions["Church of Scotland"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Church of Scotland  Unitarian"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Church of Scotland (wavering)"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Church of Scotland then Unitarian"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Congregationalist"]=array("FAI24","Protestants");
-$religions["Convert to Roman Catholicism"]=array("FAI217 Roman","Catholic");
-$religions["Dissenter"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["dissenting"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Dutch Jewish, coverted to Christianity"]=array("FAI2","Christianity");
-$religions["Early: Church of Scotland. Later wavering, then uncommitted."]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Episcopalian"]=array("FAI2414 Scottish Episcopal","Church");
-$religions["Evangelical"]=array("FAI24","Protestants");
-$religions["Evangelical (Clapham Sect)"]=array("FAI24","Protestants");
-$religions["Evangelical Anglican"]=array("FAI241","Anglicans");
-$religions["Evangelical Christian at the time later promoted his own brand of spirituality"]=array("FAI24","Protestants");
-$religions["family Methodist but becomes athiest"]=array("FAI2441 Methodists","");
-$religions["Free Church"]=array("FAI24","Protestants");
-$religions["Free thinker"]=array("FAI72","Atheists");
-$religions["Jewish"]=array("FAI5","Judaism");
-$religions["Jewish and agnostic"]=array("FAI5","Judaism");
-$religions["Jewish convert to Protestant Christianity"]=array("FAI24","Protestants");
-$religions["Lapsed Calvinist"]=array("FAI242","Calvinists");
-$religions["lapsed Methodist"]=array("FAI2441","Methodists");
-$religions["lapsed presbyterian"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["later a Wesleyan Methodist"]=array("FAI2441","Methodists");
-$religions["later atheist"]=array("FAI72","Atheists");
-$religions["Liberal Anglican"]=array("FAI241","Anglicans");
-$religions["Methodist"]=array("FAI2441","Methodists");
-$religions["Methodist (eventually)"]=array("FAI2441","Methodists");
-$religions["Methodist later agnostic"]=array("FAI2441","Methodists");
-$religions["methodist(lapsed-experience revives his faith)"]=array("FAI2441","Methodists");
-$religions["muslim"]=array("FAI4","Islam");
-$religions["New Church"]=array("FAI23 Other","Christian");
-$religions["Non Conformist"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Non-Conformist"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Noncomformist"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Nonconformist"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["none"]=array("FAI72","Atheists");
-$religions["originally Christian (Anglican) by now declared atheist"]=array("FAI72 Atheists","");
-$religions["originally Polish Catholic, by now agnostic/atheist"]=array("FAI72","Atheists");
-$religions["Orthodox Anglican"]=array("FAI241","Anglicans");
-$religions["Plymouth Brethern"]=array("FAI244 Other","Protestants");
-$religions["Plymouth Brethren"]=array("FAI244 Other","Protestants");
-$religions["Polish Catholic"]=array("FAI216 Other Catholic","");
-$religions["Prebyterian"]=array("FAI2421 Church of Scotland (Presbyterian)","");
-$religions["Presbiterian/ Quaker 1825 onwards"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Presbyterian"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Presbyterian [?]"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Presbyterian family"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Presbyterian/ Quaker 1825 onwards"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Presbyterian/lapsed in adolescence"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["presumably Catholic"]=array("FAI21","Catholic");
-$religions["Previously Unitarian; now agnostic"]=array("FAI71","Agnostics");
-$religions["Primitive Methodist"]=array("FAI2441","Methodists");
-$religions["Probably Anglican"]=array("FAI241","Anglicans");
-$religions["Probably still Anglican"]=array("FAI241","Anglicans");
-$religions["Protestant"]=array("FAI24","Protestants");
-$religions["Protestant - possibly dissenting"]=array("FAI24","Protestants");
-$religions["Protestant - probably Unitarian"]=array("FAI24","Protestants");
-$religions["Protestant -- probably Church of Scotland"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Protestant -probably Unitarian"]=array("FAI24","Protestants");
-$religions["Protestant (?)"]=array("FAI24","Protestants");
-$religions["Protestant dissenter- unitarian"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Puritan"]=array("FAI2442 Nonconformists (Baptists, Dissenters,","Puritans)");
-$religions["Quaker"]=array("FAI233","Quakers");
-$religions["Quaker (inclination)"]=array("FAI233 Quakers","");
-$religions["Quaker (Society of Friends)"]=array("FAI233","Quakers");
-$religions["Quaker or associated with the Friends"]=array("FAI233","Quakers");
-$religions["Roman Catholic"]=array("FAI217 Roman","Catholic");
-$religions["Scottish Free Church"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Scottish Presbyterian"]=array("FAI2421 Church of Scotland","(Presbyterian)");
-$religions["Spiritualism"]=array("FAI605","Other");
-$religions["Spiritualist"]=array("FAI605","Other");
-$religions["Swedenborgian"]=array("FAI23 Other","Christian");
-$religions["Theosophist / mystical / Cambridge movement"]=array("FAI24 Protestants","");
-$religions["uknown"]=array("FAI8","Unknown");
-$religions["Uncommitted"]=array("FAI7 No","Religion");
-$religions["Uncommitted (see Section 3, Additional Comments."]=array("FAI7 No","Religion");
-$religions["Uncommitted."]=array("FAI7 No","Religion");
-$religions["Unitarian"]=array("FAI24","Protestants");
-$religions["Unitarian (Martineau)"]=array("FAI24","Protestants");
-$religions["Unitarian [?]"]=array("FAI24","Protestants");
-$religions["Unitarian Christian"]=array("FAI24","Protestants");
-$religions["Unitarian; later Anglican"]=array("FAI24","Protestants");
-$religions["Unitarianism, later Anglicanism"]=array("FAI24","Protestants");
-$religions["unknown"]=array("FAI8","Unknown");
-$religions["Unknown prob Christian"]=array("FAI8","Unknown");
-$religions["unknown, probably Unitarian"]=array("FAI8","Unknown");
-$religions["various"]=array("FAI8","Unknown");
-$religions["wavering"]=array("FAI8","Unknown");
-$religions["Wavering Christian?"]=array("FAI8","Unknown");
-$religions["Wesleyan"]=array("FAI2441","Methodists");
-$religions["Wesleyan Methodist"]=array("FAI2441","Methodists");
-$religions["Wesleyan, later none"]=array("FAI2441","Methodists");
-$religions["Weslyan Methodist"]=array("FAI2441","Methodists");
-
-$provenances = array();
-$provenances["Borrowed (circulating library)"]=array("TPR202 Circulating","library");
-$provenances["borrowed (institution library)"]=array("TPR205 Institution","library");
-$provenances["borrowed (other)"]=array("TPR201 Borrowed informaly","(relations)");
-$provenances["borrowed (private library)"]=array("TPR208 Private","library");
-$provenances["borrowed (public library)"]=array("TPR209 Public","library");
-$provenances["Found"]=array("TPR204","Found");
-$provenances["NULL"]=array("TPR215","Unknown");
-$provenances["owned"]=array("TPR207","Owned");
-$provenances["read in situ"]=array("TPR210 Read in","situ");
-$provenances["reading group"]=array("TPR211 Reading","group");
-$provenances["stolen"]=array("TPR213","Stolen");
-$provenances["Subscription Library"]=array("TPR214 Subscription","library");
-$provenances["unknown"]=array("TPR215","Unknown");
+require_once("mappings.php");
 
 if(isset($argv[1])  && ($argv[1] != "")) {
 	$csv_filename = $argv[1];
@@ -239,6 +20,8 @@ $csv = new parseCSV($csv_filename);
 foreach($csv->data as $data) {
 	$exp_time = "";
 	$vt_time = array();
+
+	$vs_filename = "xml/ukred-".$data["id"].".xml";
 
 	// Ampersand protection for XML : & => &amp;
 	foreach($data as $key=>$data_content) {
@@ -351,7 +134,13 @@ foreach($csv->data as $data) {
 					$xml_sourceDesc->appendChild($xml_msDesc);
 				}
 				$xml_fileDesc->appendChild( $xml_sourceDesc);
-
+/*
+ *   <notesStmt> <note>Brief notes on the text are in a supplementary file.</note></notesStmt>
+   */
+				$xml_notesStmt= $xml->createElement("notesStmt");
+				$xml_note=$xml->createElement("note", $vs_filename);
+				$xml_notesStmt->appendChild($xml_note);
+				$xml_fileDesc->appendChild($xml_notesStmt);
 		$xml_teiHeader->appendChild( $xml_fileDesc );
 
 			$xml_profileDesc = $xml->createElement("profileDesc");
@@ -384,6 +173,7 @@ foreach($csv->data as $data) {
 				$xml_experience = $xml->createElement("experience");
 				$xml_experience->setAttribute("ref", "ukred-".$data["id"]);
 					$xml_respStmt = $xml->createElement("respStmt");
+					$xml_respStmt ->setAttribute("resp","submitter");
 						if($data["firstname"] || $data["surname"]) {
 							$xml_resp = $xml->createElement("resp", "submitted by");
 							$xml_persName3 = $xml->createElement("persName");
@@ -401,6 +191,7 @@ foreach($csv->data as $data) {
 							$xml_respStmt->appendChild($xml_email3);
 						}
 					$xml_respStmt2 = $xml->createElement("respStmt");
+					$xml_respStmt2->setAttribute("resp","editor");
 						if($data["reviewed_by"]) {
 							$xml_resp2 = $xml->createElement("resp", "reviewed by");
 							$xml_persName8 = $xml->createElement("persName");
@@ -513,9 +304,18 @@ foreach($csv->data as $data) {
 						$xml_reader->appendChild($xml_reader_sex);
 						$xml_reader->appendChild($xml_reader_age);
 
-						$xml_reader_occupation = $xml->createElement("occupation");
-						$xml_reader_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/occupation");
-						$xml_reader->appendChild($xml_reader_occupation);
+						foreach($occupation as $key=>$occ) {
+							$data["occupation"]=str_replace("\"","",$data["occupation"]);
+							if($data["occupation"]==$key) {
+								$occupation_label = $occ[1];
+								$occupation_ref = $occ[0];
+								$xml_reader_occupation = $xml->createElement("occupation", $occupation_label);
+								$xml_reader_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/occupation");
+								$xml_reader_occupation->setAttribute("ref",$occupation_ref);
+								$xml_reader->appendChild($xml_reader_occupation);
+								break;
+							}
+						}
 
 						$xml_reader_education = $xml->createElement("education");
 						$xml_reader_education->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/education");
@@ -555,7 +355,7 @@ foreach($csv->data as $data) {
 
 							$xml_listener_occupation = $xml->createElement("occupation");
 							$xml_listener_occupation->setAttribute("scheme","http://eured.univ-lemans.fr/thesaurus/occupation");
-							$xml_listener->appendChild($xml_reader_occupation);
+							$xml_listener->appendChild($xml_listener_occupation);
 
 							$xml_listener_education = $xml->createElement("education");
 							$xml_listener_education->setAttribute("scheme","http://eured.univ-lemans.fr/education/faith");
@@ -824,7 +624,6 @@ foreach($csv->data as $data) {
 	$xml->appendChild( $xml_tei );
 
 
-	$vs_filename = "xml/ukred-".$data["id"].".xml";
 	//print $xml->saveXML();
 	$xml->save($vs_filename);
 
