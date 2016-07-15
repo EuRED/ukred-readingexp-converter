@@ -2059,6 +2059,7 @@ $occupation["zoological writer"]=array("OCC1050101","Authors");
 $occupation["Zoological writer and his wife"]=array("OCC1050101","Authors");
 $occupation["zoological writer and his wife ( tract distributor)"]=array("OCC1050101","Authors");
 
+$country=array();
 $country["'unknown'"] = "Unknown";
 $country["a foreigner"] = "Unknown";
 $country["America"] = "America";
